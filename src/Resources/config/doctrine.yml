@@ -1,0 +1,29 @@
+# Doctrine configuration and services
+
+parameters:
+    doctrine.driver:        "%database.driver%"
+    doctrine.user:          "%database.user%"
+    doctrine.password:      "%database.password%"
+    doctrine.dbname:        "%database.name%"
+    doctrine.paths:         [ "%root_path%/src/App/Entity" ]
+    doctrine.is_dev:        %debug%
+
+services:
+
+    doctrine.config:
+        class:              Doctrine\ORM\Configuration
+        factory:            [ Doctrine\ORM\Tools\Setup, createAnnotationMetadataConfiguration ]
+        arguments:
+            paths:          "%doctrine.paths%"
+            isDevMode:      "%doctrine.is_dev%"
+  
+    doctrine.entity_manager:
+        class:              Doctrine\ORM\EntityManager
+        factory:            [ Doctrine\ORM\EntityManager, create ]
+        arguments:
+            conn:
+                driver:     "%doctrine.driver%"
+                user:       "%doctrine.user%"
+                password:   "%doctrine.password%"
+                dbname:     "%doctrine.dbname%"
+            config:         "@doctrine.config"

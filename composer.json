@@ -1,0 +1,41 @@
+{
+    "name": "corus/corus",
+    "type": "library",
+    "description": "Fast dependency injection framework based on Symfony components",
+    "version": "0.1.0",
+    "keywords": [ "micro", "framework", "symfony", "container", "depedency injection" ],
+    "homepage": "https://github.com/unwarysheep/corus",
+    "require": {
+        "symfony/dependency-injection": "^3.0",
+        "symfony/event-dispatcher": "^3.0",
+        "symfony/routing": "^3.0",
+        "symfony/config": "^3.0",
+        "symfony/http-foundation": "^3.0",
+        "symfony/http-kernel": "^3.0",
+        "symfony/proxy-manager-bridge": "^3.0",
+        "symfony/yaml": "^3.0",
+        "symfony/stopwatch": "^3.0",
+        "doctrine/orm": "^2.5",
+        "twig/twig": "^1.24"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^2.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Deeley",
+            "email": "unwarysheep@icloud.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/", 
+            "Corus\\Framework\\": "src/"
+         },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "minimum-stability": "stable"
+}

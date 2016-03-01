@@ -1,0 +1,34 @@
+# Services that control routing
+
+services:
+
+    route.collection:
+        class: Symfony\Component\Routing\RouteCollection
+        tags:
+            - { name: route_collection }
+  
+    router.request_context:
+        class: Symfony\Component\Routing\RequestContext
+        calls:
+            - [ fromRequest, ["@request"] ]
+  
+    router.matcher.default:
+        class: Symfony\Component\Routing\Matcher\UrlMatcher
+        arguments: [ "@route.collection", "@router.request_context" ]
+
+    router.matcher:
+        alias: router.matcher.default
+  
+    router.listener:
+        class: Symfony\Component\HttpKernel\EventListener\RouterListener
+        arguments:
+            matcher: "@router.matcher"
+            request_stack: "@request_stack"
+            context: "@router.request_context"
+  
+    router.generator:
+        class: Symfony\Component\Routing\Generator\UrlGenerator
+        arguments:
+            routes: "@route.collection"
+            context: "@router.request_context"
+

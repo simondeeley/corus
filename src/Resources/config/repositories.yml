@@ -1,0 +1,8 @@
+# Doctrine repository configuration
+
+services:
+
+    repository.page:
+        class:      Doctrine\ORM\EntityRepository
+        factory:    [ "@doctrine.entity_manager", getRepository ]
+        arguments:  [ App\Entity\Page ]
