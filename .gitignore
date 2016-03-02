@@ -3,5 +3,4 @@ composer.lock
 /vendor/
 /dist/
 /cache/
-.DS_Store
 .env

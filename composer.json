@@ -16,10 +16,12 @@
         "symfony/yaml": "^3.0",
         "symfony/stopwatch": "^3.0",
         "doctrine/orm": "^2.5",
-        "twig/twig": "^1.24"
+        "twig/twig": "^1.24",
+        "mikey179/vfsStream": "^1.6"
     },
     "require-dev": {
-        "vlucas/phpdotenv": "^2.2"
+        "vlucas/phpdotenv": "^2.2",
+        "phpunit/phpunit": "^5.2"
     },
     "license": "MIT",
     "authors": [
@@ -31,11 +33,16 @@
     "autoload": {
         "psr-4": {
             "": "src/", 
-            "Corus\\Framework\\": "src/"
+            "Corus\\Framework\\": "src"
          },
         "exclude-from-classmap": [
             "/Tests/"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Corus\\Framework\\Test\\": "tests"
+        }
     },
     "minimum-stability": "stable"
 }
