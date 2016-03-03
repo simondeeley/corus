@@ -2,7 +2,6 @@ Corus
 =====
 A fast dependency injection framework based on Symfony components
 
------
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2ced4686-95de-48df-b455-aa4ca80facbb/mini.png)](https://insight.sensiolabs.com/projects/2ced4686-95de-48df-b455-aa4ca80facbb) [![Build Status](https://travis-ci.org/unwarysheep/corus.svg?branch=master)](https://travis-ci.org/unwarysheep/corus)
 
