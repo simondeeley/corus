@@ -2,7 +2,6 @@
     "name": "corus/corus",
     "type": "library",
     "description": "Fast dependency injection framework based on Symfony components",
-    "version": "0.1.0",
     "keywords": [ "micro", "framework", "symfony", "container", "depedency injection" ],
     "homepage": "https://github.com/unwarysheep/corus",
     "require": {
@@ -16,12 +15,12 @@
         "symfony/yaml": "^3.0",
         "symfony/stopwatch": "^3.0",
         "doctrine/orm": "^2.5",
-        "twig/twig": "^1.24",
-        "mikey179/vfsStream": "^1.6"
+        "twig/twig": "^1.24"
     },
     "require-dev": {
         "vlucas/phpdotenv": "^2.2",
-        "phpunit/phpunit": "^5.2"
+        "phpunit/phpunit": "^5.2",
+        "mikey179/vfsStream": "^1.6"
     },
     "license": "MIT",
     "authors": [
@@ -32,7 +31,6 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/", 
             "Corus\\Framework\\": "src"
          },
         "exclude-from-classmap": [
