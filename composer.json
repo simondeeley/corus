@@ -1,5 +1,5 @@
 {
-    "name": "corus/corus",
+    "name": "corus-framework/corus",
     "type": "library",
     "description": "Fast dependency injection framework based on Symfony components",
     "keywords": [ "micro", "framework", "symfony", "container", "depedency injection" ],
