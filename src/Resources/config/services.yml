@@ -1,9 +1,0 @@
-# Import the required configurations
-
-imports:
-    - { resource: "routing.yml" }
-    - { resource: "events.yml" }
-    - { resource: "twig.yml" }
-    - { resource: "doctrine.yml" }
-    - { resource: "repositories.yml" }
-    - { resource: "kernel.yml" }
