@@ -32,6 +32,7 @@ use Symfony\Component\HttpKernel\Config\EnvParametersResource;
  */
 class Container extends ContainerBuilder
 {
+    
     const DEFAULT_CHARSET = 'UTF-8';
 
     /**

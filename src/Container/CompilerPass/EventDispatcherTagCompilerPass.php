@@ -7,6 +7,8 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * Compiler pass to register tagged services for an event dispatcher.
+ *
+ * @implements CompilerPassInterface
  */
 class EventDispatcherTagCompilerPass implements CompilerPassInterface
 {
