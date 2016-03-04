@@ -67,12 +67,7 @@ class Container extends ContainerBuilder
      */
     public static function build(string $rootDir, bool $debug = false)
     {
-        $rootDir = realpath($rootDir) ?: $rootDir;
-        
-        $containerDefaultConfigDir = __DIR__.'/../Resources/config/';
-        $containerUserConfigDir    = $rootDir.'/config/';
-        $containerDebugConfigDir   = ($debug) ? $containerDefaultConfigDir.'debug/' : '';
-         
+        $rootDir = realpath($rootDir) ?: $rootDir;        
         $class = (string) 'Container'.'_'.md5($rootDir.($debug ? 'Debug' : ''));
         $cache = new ConfigCache($rootDir.'/cache/'.$class.'.php', $debug);
         
@@ -82,9 +77,14 @@ class Container extends ContainerBuilder
             $container->addCompilerPass(new EventDispatcherTagCompilerPass);
             $container->setProxyInstantiator(new RuntimeInstantiator);
             $container->addResource(new EnvParametersResource('APP__'));
+                        
+            $configPaths = array(__DIR__.'/../Resources/config/', $rootDir.'/config/');
+            if ($debug) {
+                $configPaths[] = __DIR__.'/../Resources/config/debug/';
+            }
             
             $loader = static::getLoader($container);
-            foreach(compact('containerDefaultConfigDir', 'containerDebugConfigDir', 'containerUserConfigDir') as $path) {
+            foreach($configPaths as $path) {
                 if (null !== $cont = $loader->load($path)) {
                     $container->merge($cont);
                 }
