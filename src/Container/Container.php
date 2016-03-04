@@ -32,7 +32,6 @@ use Symfony\Component\HttpKernel\Config\EnvParametersResource;
  */
 class Container extends ContainerBuilder
 {
-    
     const DEFAULT_CHARSET = 'UTF-8';
 
     /**
@@ -71,21 +70,15 @@ class Container extends ContainerBuilder
     public static function build(string $rootDir, bool $debug = false)
     {
         $rootDir = realpath($rootDir) ?: $rootDir;
+        
+        $containerDefaultConfigDir = __DIR__.'/../Resources/config/';
+        $containerUserConfigDir    = $rootDir.'/config/';
+        $containerDebugConfigDir   = ($debug) ? $containerDefaultConfigDir.'debug/' : '';
+         
         $class = (string) 'Container'.'_'.md5($rootDir.($debug ? 'Debug' : ''));
         $cache = new ConfigCache($rootDir.'/cache/'.$class.'.php', $debug);
         
-        if (false === $cache->isFresh()) {
-            
-            foreach (array('cache' => $rootDir.'/cache', 'logs' => $rootDir.'/logs') as $name => $dir) {
-                if (!is_dir($dir)) {
-                    if (false === @mkdir($dir, 0777, true) && !is_dir($dir)) {
-                        throw new \RuntimeException(sprintf("Unable to create the %s directory (%s)\n", $name, $dir));
-                    }
-                } elseif (!is_writable($dir)) {
-                    throw new \RuntimeException(sprintf("Unable to write in the %s directory (%s)\n", $name, $dir));
-                }
-            }
-            
+        if (false === $cache->isFresh()) {            
             $container = new self(new ParameterBag(static::getParameters($rootDir, $debug)));
             $container->addCompilerPass(new RouterTagCompilerPass);
             $container->addCompilerPass(new EventDispatcherTagCompilerPass);
@@ -93,7 +86,7 @@ class Container extends ContainerBuilder
             $container->addResource(new EnvParametersResource('APP__'));
             
             $loader = static::getLoader($container);
-            foreach(array(__DIR__.'/../Resources/config/', $rootDir.'/config/') as $path) {
+            foreach(compact('containerDefaultConfigDir', 'containerDebugConfigDir', 'containerUserConfigDir') as $path) {
                 if (null !== $cont = $loader->load($path)) {
                     $container->merge($cont);
                 }
