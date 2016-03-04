@@ -2,6 +2,4 @@ composer.phar
 composer.lock
 /vendor/
 /dist/
-/cache/
-/logs/
 .env

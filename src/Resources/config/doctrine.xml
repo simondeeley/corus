@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="doctrine.driver">%database.driver%</parameter>
+        <parameter key="doctrine.user">%database.user%</parameter>
+        <parameter key="doctrine.password">%database.password%</parameter>
+        <parameter key="doctrine.dbname">%database.name%</parameter>
+        <parameter key="doctrine.debug">%kernel.debug%</parameter>
+    </parameters>
+    
+    <services>
+        <service id="doctrine.config" class="Doctrine\ORM\Configuration">
+            <factory class="Doctrine\ORM\Tools\Setup" method="createAnnotationMetadataConfiguration" />
+            <argument type="collection">
+                <argument key="paths"></argument>
+                <argument key="isDevMode">%doctrine.debug%</argument>
+            </argument>
+        </service>
+        
+        <service id="doctrine.entity_manager" class="Doctrine\ORM\EntityManager">
+            <factory class="Doctrine\ORM\EntityManager" method="create" />
+            <argument key="conn" type="collection">
+                <argument key="driver">%doctrine.driver%</argument>
+                <argument key="user">%doctrine.user%</argument>
+                <argument key="password">%doctrine.password%</argument>
+                <argument key="dbname">%doctrine.dbname%</argument>
+            </argument>
+            <argument key="config" type="service" id="doctrine.config" />
+        </service> 
+    </services>
+</container>
