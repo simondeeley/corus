@@ -4,7 +4,7 @@ services:
 
     templating.twig_loader:
         class:      Twig_Loader_Filesystem
-        arguments:  [ "%root_path%/src/App/View" ]
+        arguments:  [ "%kernel.root_dir%/src/App/View" ]
   
     templating.twig:
         class:      Twig_Environment

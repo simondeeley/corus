@@ -5,8 +5,8 @@ parameters:
     doctrine.user:          "%database.user%"
     doctrine.password:      "%database.password%"
     doctrine.dbname:        "%database.name%"
-    doctrine.paths:         [ "%root_path%/src/App/Entity" ]
-    doctrine.is_dev:        %debug%
+    doctrine.paths:         [ "%kernel.root_dir%/src/App/Entity" ]
+    doctrine.is_dev:        %kernel.debug%
 
 services:
 

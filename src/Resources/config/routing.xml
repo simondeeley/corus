@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="route.collection" class="Symfony\Component\Routing\RouteCollection">
+            <tag name="route_collection" />
+        </service>
+
+        <service id="router.request_context" class="Symfony\Component\Routing\RequestContext">
+            <call method="fromRequest">
+                <argument type="service" id="request" />
+            </call>
+        </service>
+
+        <service id="router.matcher.default" class="Symfony\Component\Routing\Matcher\UrlMatcher">
+            <argument type="service" id="route.collection" />
+            <argument type="service" id="router.request_context" />
+        </service>
+        <service id="router.matcher" alias="router.matcher.default" />
+        
+        <service id="router_listener" class="Symfony\Component\HttpKernel\EventListener\RouterListener">
+            <tag name="event_subscriber" />
+            <argument type="service" id="router.matcher" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router.request_context" />
+        </service>
+
+        <service id="router.generator" class="Symfony\Component\Routing\Generator\UrlGenerator">
+            <argument type="service" id="route.collection" />
+            <argument type="service" id="router.request_context" />
+        </service>        
+    </services>
+</container>
