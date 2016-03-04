@@ -3,4 +3,5 @@ composer.lock
 /vendor/
 /dist/
 /cache/
+/logs/
 .env

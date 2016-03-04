@@ -22,3 +22,8 @@ services:
     controller.page:
         class:              App\Controller\PageController
         arguments:          [ "@templating.twig", "@repository.page" ]
+
+    repository.page:
+        class:      Doctrine\ORM\EntityRepository
+        factory:    [ "@doctrine.entity_manager", getRepository ]
+        arguments:  [ App\Entity\Page ]
