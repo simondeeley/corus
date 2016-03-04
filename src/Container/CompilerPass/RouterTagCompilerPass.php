@@ -7,6 +7,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * RouterTagCompilerPass class.
+ * 
+ * @implements CompilerPassInterface
+ */
 class RouterTagCompilerPass implements CompilerPassInterface
 {
     protected $service;
