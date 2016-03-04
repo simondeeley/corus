@@ -1,6 +1,7 @@
 Corus
 =====
 <<<<<<< HEAD
+<<<<<<< HEAD
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2ced4686-95de-48df-b455-aa4ca80facbb/mini.png)](https://insight.sensiolabs.com/projects/2ced4686-95de-48df-b455-aa4ca80facbb) [![Latest Stable Version](https://poser.pugx.org/corus-framework/corus/v/stable)](https://packagist.org/packages/corus-framework/corus) [![Total Downloads](https://poser.pugx.org/corus-framework/corus/downloads)](https://packagist.org/packages/corus-framework/corus) [![Latest Unstable Version](https://poser.pugx.org/corus-framework/corus/v/unstable)](https://packagist.org/packages/corus-framework/corus) [![License](https://poser.pugx.org/corus-framework/corus/license)](https://packagist.org/packages/corus-framework/corus)
 
 A fast dependency injection framework based on Symfony components
@@ -9,6 +10,10 @@ A fast dependency injection framework based on Symfony components
 <<<<<<< HEAD
 =======
 [![Latest Stable Version](https://poser.pugx.org/corus-framework/corus/v/stable)](https://packagist.org/packages/corus-framework/corus) [![Total Downloads](https://poser.pugx.org/corus-framework/corus/downloads)](https://packagist.org/packages/corus-framework/corus) [![Latest Unstable Version](https://poser.pugx.org/corus-framework/corus/v/unstable)](https://packagist.org/packages/corus-framework/corus) [![License](https://poser.pugx.org/corus-framework/corus/license)](https://packagist.org/packages/corus-framework/corus)
+=======
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/2ced4686-95de-48df-b455-aa4ca80facbb/mini.png)](https://insight.sensiolabs.com/projects/2ced4686-95de-48df-b455-aa4ca80facbb) [![Latest Stable Version](https://poser.pugx.org/corus-framework/corus/v/stable)](https://packagist.org/packages/corus-framework/corus) [![Total Downloads](https://poser.pugx.org/corus-framework/corus/downloads)](https://packagist.org/packages/corus-framework/corus) [![Latest Unstable Version](https://poser.pugx.org/corus-framework/corus/v/unstable)](https://packagist.org/packages/corus-framework/corus) [![License](https://poser.pugx.org/corus-framework/corus/license)](https://packagist.org/packages/corus-framework/corus)
+
+>>>>>>> origin/master
 A fast dependency injection framework based on Symfony components
 
 <<<<<<< HEAD
