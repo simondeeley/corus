@@ -29,7 +29,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider providerTestBuild
      */
-    public function testBuild(string $rootDir, bool $debug)
+    public function testBuild($rootDir, bool $debug)
     {
         $container = Container::build($rootDir, $debug);
 
@@ -42,7 +42,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider providerTestBuild
      */    
-    public function testNotFoundResponse(string $rootDir, bool $debug)
+    public function testNotFoundResponse($rootDir, bool $debug)
     {
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         
