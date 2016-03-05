@@ -26,7 +26,7 @@ class RouterTagCompilerPass implements CompilerPassInterface
      * @param string $serviceTag (default: 'route_collection')
      * @return void
      */
-    public function __construct(string $service = 'route', string $serviceTag = 'route_collection')
+    public function __construct($service = 'route', $serviceTag = 'route_collection')
     {
         $this->service = $service;
         $this->serviceTag = $serviceTag;
