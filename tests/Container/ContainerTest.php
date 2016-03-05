@@ -10,57 +10,86 @@ use Corus\Framework\Container\Container;
  * ContainerTest class.
  */
 class ContainerTest extends \PHPUnit_Framework_TestCase
-{     
+{
     /**
-     * setUp function.
+     * Container
      * 
-     * @access public
+     * @var Container
+     * @access protected
+     */
+    protected $container;
+       
+    /**
+     * Setup the Container for testing.
+     * 
+     * @access protected
      * @return void
      */
-    public function setUp()
+    protected function setUp()
     {
-        $structure = array('test' => array('config'   => array()));
-        vfsStream::setup('root', null, $structure);
+        vfsStream::setup('root', null, array(
+            'test' => array(
+                'config'   => array()
+            )
+        ));
+        
+        $this->container = Container::build(vfsStream::url('root/test'));
     }
 
     /**
      * Test Container is built correctly and that
      * it is caching files correctly.
-     *
-     * @dataProvider providerTestBuild
-     */
-    public function testBuild($rootDir, $debug)
-    {
-        $container = Container::build($rootDir, $debug);
-
-        $this->assertInstanceOf(\Symfony\Component\DependencyInjection\Container::class, $container);
-        $this->assertTrue(vfsStreamWrapper::getRoot()->getChild('test')->getChild('cache')->hasChildren());      
-    }
-    
-    /**
-     * Test container throws correct 404 errors
-     *
-     * @dataProvider providerTestBuild
-     */    
-    public function testNotFoundResponse($rootDir, $debug)
-    {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
-        
-        $container = Container::build($rootDir, $debug);
-        $container->get('response'); 
-    }
-    
-    /**
-     * providerTestBuild function.
      * 
      * @access public
      * @return void
      */
-    public function providerTestBuild()
+    public function testBuild()
     {
-        return array(
-            array(vfsStream::url('root/test'), true),
-            array(vfsStream::url('root/test'), false)
-        );
+        $class = (string) 'Container'.'_'.md5(vfsStream::url('root/test')).'.php';
+
+        $this->assertInstanceOf(\Symfony\Component\DependencyInjection\Container::class, $this->container);
+        $this->assertTrue(vfsStreamWrapper::getRoot()->getChild('test')->getChild('cache')->hasChild($class));     
+    }
+    
+    /**
+     * Test container throws correct 404 errors
+     * 
+     * @access public
+     * @return void
+     */    
+    public function testNotFoundResponse()
+    {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->container->get('response'); 
+    }
+    
+    /**
+     * Test ContainerBuilder throws exception when
+     * trying to use service_container definition
+     *
+     * @access public
+     * @return void
+     */
+    public function testInvalidArgumentException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('/^Cannot use service definition "([a-z_]*)?" when building the container.$/');
+
+        $container = new Container;
+        $container->setDefinition('service_container', new \Symfony\Component\DependencyInjection\Definition($container));
+        $container->get('service_container');
+        
+        unset($container);
+    } 
+     
+    /**
+     * Unset variables not required anymore.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function tearDown()
+    {
+        unset($this->container);
     }
 }
