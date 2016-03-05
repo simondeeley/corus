@@ -5,14 +5,19 @@
          backupGlobals="false"
          colors="true"
          bootstrap="vendor/autoload.php"
->
+         verbose="true">
+
     <php>
         <ini name="error_reporting" value="-1" />
+        <server name="APP__DATABASE_DRIVER" value="pdo_mysql" />
+        <server name="APP__DATABASE_NAME" value="true-di" />
+        <server name="APP__DATABASE_USER" value="homestead" />
+        <server name="APP__DATABASE_PASSWORD" value="secret" />
     </php>
 
     <testsuites>
         <testsuite name="Corus Framework Test Suit">
-            <directory>./Tests/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -20,7 +25,6 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <directory>./Tests</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>
