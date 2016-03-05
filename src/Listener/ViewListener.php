@@ -55,7 +55,28 @@ class ViewListener
 
         $response = new Response($this->templating->render($viewPath, $data));
 
+        $response->setCache(array(
+            'public'        => true,
+            'last_modified' => $this->getLastModified($controller[0]),
+        ));
+
         $event->setResponse($response);
+    }
+    
+    /**
+     * Returns the last modified time for the controller.
+     * 
+     * @access private
+     *
+     * @param string $controller    The (fully qualified) name of the controller
+     * @return DateTime             An instance of PHP's DateTime object
+     */
+    private function getLastModified($controller)
+    {
+        $reflection = new \ReflectionClass($controller);
+        $filename = $reflection->getFileName();
+        
+        return new \Datetime('@'.filemtime($filename));
     }
 
 }
