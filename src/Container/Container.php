@@ -65,7 +65,7 @@ class Container extends ContainerBuilder
      * @param bool   $debug    Enable debug mode (defaults to false)
      * @return ContainerInterface   A dependency injection container
      */
-    public static function build(string $rootDir, bool $debug = false)
+    public static function build($rootDir, bool $debug = false)
     {
         $rootDir = realpath($rootDir) ?: $rootDir;        
         $class = (string) 'Container'.'_'.md5($rootDir.($debug ? 'Debug' : ''));
