@@ -65,7 +65,7 @@ class Container extends ContainerBuilder
      * @param bool   $debug    Enable debug mode (defaults to false)
      * @return ContainerInterface   A dependency injection container
      */
-    public static function build($rootDir, bool $debug = false)
+    public static function build($rootDir, $debug = false)
     {
         $rootDir = realpath($rootDir) ?: $rootDir;        
         $class = (string) 'Container'.'_'.md5($rootDir.($debug ? 'Debug' : ''));
@@ -114,7 +114,7 @@ class Container extends ContainerBuilder
      * @param bool   $debug     True|False if debug mode enabled|disabled
      * @return array            An array of kernel parameters
      */
-    protected static function getParameters(string $rootDir, bool $debug)
+    protected static function getParameters($rootDir, $debug)
     {
         $env = array();
         foreach ($_SERVER as $key => $value) {
