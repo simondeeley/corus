@@ -44,11 +44,11 @@ class Container extends ContainerBuilder
      */
     public function get($id, $invalidBehavior = ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE)
     {        
-        if (strtolower($id) == 'service_container') {
+        if (strtolower($id) === 'service_container') {
             if (ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalidBehavior) {
                 return;
             }
-            throw new \InvalidArgumentException(sprintf('The service definition "%s" does not exist.', $id));
+            throw new \InvalidArgumentException(sprintf('Cannot use service definition "%s" when building the container.', $id));
         }
 
         return parent::get($id, $invalidBehavior);
