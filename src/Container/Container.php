@@ -6,6 +6,7 @@ use Corus\Framework\Container\CompilerPass\EventDispatcherTagCompilerPass;
 use Corus\Framework\Container\CompilerPass\RouterTagCompilerPass;
 use Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator;
 use Symfony\Bridge\ProxyManager\LazyProxy\PhpDumper\ProxyDumper;
+use Symfony\Component\ClassLoader\MapClassLoader;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderResolver;
@@ -71,6 +72,9 @@ class Container extends ContainerBuilder
         $class = (string) 'Container'.'_'.md5($rootDir.($debug ? 'Debug' : ''));
         $cache = new ConfigCache($rootDir.'/cache/'.$class.'.php', $debug);
         
+        $loader = new MapClassLoader(array($class => $cache->getPath()));
+        $loader->register();
+
         if (false === $cache->isFresh()) {            
             $container = new self(new ParameterBag(static::getParameters($rootDir, $debug)));
             $container->addCompilerPass(new RouterTagCompilerPass);
@@ -99,8 +103,6 @@ class Container extends ContainerBuilder
             
             $cache->write($content, $container->getResources());
         }
-        
-        require_once $cache->getPath();
 
         return new $class;
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="http_kernel.cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
+            <argument>%kernel.cache_dir%/http</argument>
+        </service>
+        
+        <service id="http_kernel.esi_cache" class="Symfony\Component\HttpKernel\HttpCache\Esi" />
+        
+        <service id="http_kernel.cache" class="Symfony\Component\HttpKernel\HttpCache\HttpCache" decorates="http_kernel.default">
+            <argument type="service" id="http_kernel.cache.inner" />
+            <argument type="service" id="http_kernel.cache.store" />
+            <argument type="service" id="http_kernel.esi_cache" />
+            <argument type="collection">
+                <argument key="debug">%kernel.debug%</argument>
+            </argument>
+        </service>
+        
+        <service id="http_kernel" alias="http_kernel.cache" />
+    </services>
+</container>
