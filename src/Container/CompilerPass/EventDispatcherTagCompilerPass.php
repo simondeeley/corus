@@ -115,7 +115,7 @@ class EventDispatcherTagCompilerPass implements CompilerPassInterface
      * @param string $id
      * @return void
      */
-    private function getDefinition(string $id, ContainerBuilder $container)
+    private function getDefinition($id, ContainerBuilder $container)
     {
         $def = $container->getDefinition($id);
         if (!$def->isPublic()) {
